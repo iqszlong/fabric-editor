@@ -58,6 +58,16 @@ const props = defineProps({
   },
 });
 
+const customSize = [
+  {
+    value: 0,
+    name: '手机主题',
+    width: 1080,
+    height: 2640,
+    unit: 'px',
+  },
+];
+
 const modal = ref(false);
 const width = ref(null);
 const height = ref(null);
@@ -67,7 +77,7 @@ const showSetSize = (w, h) => {
   height.value = h || null;
   // 获取素材
   canvasEditor.getSizeList().then((res) => {
-    sizeList.value = res;
+    sizeList.value = [...customSize, ...res];
   });
   modal.value = true;
 };

@@ -22,9 +22,6 @@
     </div>
 
     <div class="right">
-      <a href="https://pro.kuaitu.cc/" target="_blank" alt="商业版">
-        <img width="15" :src="proIcon" alt="vue-fbric-editor" />
-      </a>
       <!-- 管理员模式 -->
       <admin />
       <!-- 预览 -->

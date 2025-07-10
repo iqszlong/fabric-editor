@@ -200,6 +200,8 @@
   "red_book_horizontal": "红书横版",
   "phone_wallpaper": "手机壁纸",
   "attributes": {
+    "width": "宽",
+    "height": "高",
     "id": "标识",
     "linkData": "关联",
     "font": "字体",
@@ -222,7 +224,11 @@
     "offset_y": "Y轴",
     "borderRadiusX": "圆角水平半径",
     "borderRadiusY": "圆角垂直半径",
-    "rx_ry": "半径"
+    "rx_ry": "半径",
+    "scale_x": "缩放X",
+    "scale_y": "缩放Y",
+    "c_left": "中X",
+    "c_top": "中Y"
   },
   "setSizeTip": "调整画布尺寸",
   "tip": "提示",

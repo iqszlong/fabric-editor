@@ -17,7 +17,7 @@ const state = reactive({
   toolsBarShow: true,
 });
 // 左侧菜单渲染
-const menuActive = ref('importTmpl');
+const menuActive = ref('layer');
 const leftBarComponent = {
   importTmpl,
   tools,
@@ -30,6 +30,12 @@ const leftBarComponent = {
 // fix: 修复vue-i18n function "t" not reactive inside ref object
 // https://github.com/intlify/vue-i18n/issues/1396#issuecomment-1716123143
 const leftBar = reactive([
+  {
+    // 图层
+    key: 'layer',
+    name: computed(() => t('layers')),
+    icon: 'md-reorder',
+  },
   {
     //模板
     key: 'importTmpl',
@@ -55,12 +61,6 @@ const leftBar = reactive([
     icon: 'ios-leaf-outline',
   },
   {
-    // 图层
-    key: 'layer',
-    name: computed(() => t('layers')),
-    icon: 'md-reorder',
-  },
-  {
     // 用户素材
     key: 'myMaterial',
     name: computed(() => t('mine')),
@@ -73,6 +73,10 @@ const hideToolsBar = () => {
 };
 // 展示工具条
 const showToolsBar = (val) => {
+  if (menuActive.value === val) {
+    hideToolsBar();
+    return;
+  }
   menuActive.value = val;
   state.toolsBarShow = true;
 };
@@ -104,10 +108,10 @@ onMounted(() => {
       </div>
     </div>
     <!-- 关闭按钮 -->
-    <div
+    <!-- <div
       :class="`close-btn left-btn ${state.toolsBarShow && 'left-btn-open'}`"
       @click="hideToolsBar"
-    ></div>
+    ></div> -->
   </div>
 </template>
 
@@ -122,6 +126,10 @@ onMounted(() => {
 
   &.show-tools-bar {
     width: 380px;
+  }
+
+  &:hover .close-btn {
+    opacity: 1;
   }
 }
 .ivu-menu-vertical .menu-item {
@@ -160,6 +168,9 @@ onMounted(() => {
   z-index: 1;
   top: 50%;
   margin-top: -10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.8));
 
   &.left-btn {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAACACAYAAAB5sSvuAAAAAXNSR0IArs4c6QAAAFBlWElmTU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAKKADAAQAAAABAAAAgAAAAAAobJzlAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgoZXuEHAAADf0lEQVR4Ae2cvYsTQRjGE7FQkICFB1pZRyzEJkUKmzOpBEHwX9DCQkmChf4JahewsLpWFOQUzwMRPEgEy0PLpPADvEISDrVyfZ6cK0tIZrI7u7MPMi+8mb35uPnlmXczyeXmrURRdKyibAB8Dz8pywg42if4OUnIGd7Bww8Ut+GHpEATgPEll/y8DGRMtaB8hrryl30B2HzVW1Rcgx8vQ9UqaVac+Cf67cC34C+q1erHFcc5dUsDOD/RGBWv4M/hrwG8jzJ3cwFMwlDdd/BN+BZgd5ONLtd5Ac4zfEYFld0ALMMisxUFmAQa44dHdMB+TTasdM2bxJNxI7gDP7ISWNzJE1xymhF+uBzPbyvL2NZOA+oJIO/BrfP7iEGTSNtovIrY/L6sU9mA5PoAby6DtEq87JnlWF/H7+K+v/DmUQDkc23CNxbFpAogIa/Ab/IiaQoxmOThlnkG8TiKK5UUJNNR+MMYjqUaIJnWEYuXeEFTBCTXv1hUi0HCxXYWsbirqiAhb/BBWcE9KLimDEgB68pLTMAL6oBNdcBT6oBr6oAn1O9i2a2Od/DM1Jc4KBivVOYyLHFm6f4ODAoGBV0VcB0fYjAo6KqA6/gQg0FBVwVcx4cYDAq6KuA6/v+Mwel0Wmm325XhcOgqkH08/h6cyiaTSdRoNPhvBFGtVosGg0Gq8Wk7V9IO6Pf7MzgC+oBMDcgn1Ov1vEFmAvQJmRmQkN1ut3AlnQB9QDoDErLT6RSmZC6ARULmBlgUpPxWl5uCRcVhLoBFwTFsnAGLfi10AiwazklBX/txJgV9wWVSUP7tlvwbVspOyFarVfi7ac4Vvquzfyoy95DfiwOgeQHtrUFBu0bmHkFBsz721qCgXSNzj6CgWR97a1DQrpG5R1DQrI+9NSho18jcIyho1sfauqeuoDzgN3UFv6gD7qh/cK8rA84OGygv8VO+CCkrKH3g5Q1P41BB1SV+QDia4hJvQ72LB3h6gPIH/+5CvVGsntoSPwYQzxr/VgRkJoF1wP1KwvFa4SaRPgDNI+RLT2dTwTJfB+9j/jaWden5dgIe5oNnG2O+WwCb7bXWuflliSfLlAjCh4JULHMqjaIAc0tGkhdgnM6FyXI2EV+5pXNxAeTSMSHOSzg3+H2UuVsaQKq0A/eaUmiVb9yZlOk6vJSkTCZA2bRWsonBpFOrySan+wNoJmOM0LyBGwAAAABJRU5ErkJggg==);

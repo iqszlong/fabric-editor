@@ -27,6 +27,22 @@
           ></InputNumber>
         </Col>
       </Row>
+      <Row :gutter="10">
+        <Col flex="1">
+          <InputNumber
+            v-model="baseAttr.cLeft"
+            @on-change="(value) => changeCommon('cleft', value)"
+            :append="$t('attributes.c_left')"
+          ></InputNumber>
+        </Col>
+        <Col flex="1">
+          <InputNumber
+            v-model="baseAttr.cTop"
+            @on-change="(value) => changeCommon('ctop', value)"
+            :append="$t('attributes.c_top')"
+          ></InputNumber>
+        </Col>
+      </Row>
       <Form :label-width="40" class="form-wrap">
         <FormItem :label="$t('attributes.angle')">
           <Slider
@@ -78,11 +94,14 @@ const baseAttr = reactive({
   top: 0,
   rx: 0,
   ry: 0,
+  cLeft: 0,
+  cTop: 0,
 });
 
 // 属性获取
 const getObjectAttr = (e) => {
   const activeObject = canvasEditor.canvas.getActiveObject();
+  const center = getCenterPoint();
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return;
   if (activeObject && isMatchType) {
@@ -90,7 +109,15 @@ const getObjectAttr = (e) => {
     baseAttr.left = activeObject.get('left');
     baseAttr.top = activeObject.get('top');
     baseAttr.angle = activeObject.get('angle') || 0;
+    baseAttr.cTop = activeObject.get('top') - center.y;
+    baseAttr.cLeft = activeObject.get('left') - center.x;
   }
+};
+
+const getCenterPoint = () => {
+  const size = canvasEditor.getWorkspase();
+  const { width: w, height: h } = size || {};
+  return { x: w / 2, y: h / 2 };
 };
 
 // 通用属性改变
@@ -106,6 +133,18 @@ const changeCommon = (key, value) => {
     // 旋转角度适配
     if (key === 'angle') {
       activeObject.rotate(value);
+      canvasEditor.canvas.renderAll();
+      return;
+    }
+    if (key === 'cleft') {
+      const center = getCenterPoint();
+      activeObject && activeObject.set('left', value + center.x);
+      canvasEditor.canvas.renderAll();
+      return;
+    }
+    if (key === 'ctop') {
+      const center = getCenterPoint();
+      activeObject && activeObject.set('top', value + center.y);
       canvasEditor.canvas.renderAll();
       return;
     }
