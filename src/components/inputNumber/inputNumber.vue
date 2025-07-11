@@ -354,6 +354,7 @@ const useSwipe = (target: MaybeRefOrGetter<HTMLElement | null | undefined>) => {
 
 // mounted
 onMounted(() => {
+  if (props.disabled || props.readonly) return;
   appendLabelRef.value && useSwipe(appendLabelRef);
   prependLabelRef.value && useSwipe(prependLabelRef);
 });
@@ -526,7 +527,10 @@ defineExpose({
       flex-shrink: 0;
       padding: 0 10px;
       user-select: none;
-      cursor: ew-resize;
+
+      & :not(.@{input-number-prefix-cls}-disabled) {
+        cursor: ew-resize;
+      }
     }
   }
 

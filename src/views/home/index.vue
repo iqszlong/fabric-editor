@@ -83,7 +83,7 @@ const canvasEditor = new Editor() as IEditor;
 const state = reactive({
   show: false,
   select: null,
-  ruler: true,
+  ruler: false,
 });
 
 onMounted(() => {
@@ -132,7 +132,7 @@ onMounted(() => {
     .use(WaterMarkPlugin)
     .use(PsdPlugin)
     .use(ImageStroke)
-    .use(ResizePlugin)
+    // .use(ResizePlugin)
     .use(LockPlugin)
     .use(AddBaseTypePlugin)
     .use(MaskPlugin);

@@ -9,23 +9,38 @@
 <template>
   <div v-if="!isSelect" class="attr-item-box">
     <!-- <h3>{{ $t('bgSeting.size') }}</h3> -->
-    <Divider plain orientation="left">
+    <!-- <Divider plain orientation="left">
       <h4>{{ $t('bgSeting.size') }}</h4>
-    </Divider>
-    <Form :label-width="40" inline class="form-wrap">
-      <FormItem :label="$t('bgSeting.width')" prop="name">
-        <InputNumber disabled v-model="width" readonly @on-change="setSize"></InputNumber>
-      </FormItem>
-      <FormItem :label="$t('bgSeting.height')" prop="name">
-        <InputNumber disabled v-model="height" readonly @on-change="setSize"></InputNumber>
-      </FormItem>
-      <FormItem :label-width="0">
-        <Button type="text" @click="showSetSize">
-          <Icon type="md-create" />
-        </Button>
-      </FormItem>
-    </Form>
-
+    </Divider> -->
+    <Space direction="vertical" type="flex">
+      <Form class="form-wrap">
+        <FormItem prop="name">
+          <InputNumber
+            v-model="width"
+            @on-change="setSize"
+            :append="$t('bgSeting.width')"
+          ></InputNumber>
+        </FormItem>
+        <FormItem>
+          <Tooltip :content="$t('bgSeting.swap')">
+            <Button long @click="swapSize" type="text">
+              <Icon type="md-swap" />
+            </Button>
+          </Tooltip>
+        </FormItem>
+        <FormItem prop="name">
+          <InputNumber
+            v-model="height"
+            @on-change="setSize"
+            :append="$t('bgSeting.height')"
+          ></InputNumber>
+        </FormItem>
+      </Form>
+      <Button long @click="showSetSize" size="large">
+        <Icon type="md-create" />
+        {{ $t('setSizeTip') }}
+      </Button>
+    </Space>
     <!-- <Divider plain></Divider> -->
     <!-- 修改尺寸 -->
     <modalSzie :title="$t('setSizeTip')" ref="modalSizeRef" @set="handleConfirm"></modalSzie>
@@ -35,6 +50,7 @@
 <script setup name="CanvasSize">
 import useSelect from '@/hooks/select';
 import modalSzie from '@/components/common/modalSzie';
+import InputNumber from '@/components/inputNumber';
 
 const { isSelect, canvasEditor } = useSelect();
 
@@ -66,6 +82,13 @@ const handleConfirm = (w, h) => {
   height.value = h;
   setSize();
 };
+
+const swapSize = () => {
+  const temp = width.value;
+  width.value = height.value;
+  height.value = temp;
+  setSize();
+};
 </script>
 
 <style scoped lang="less">
@@ -74,7 +97,8 @@ const handleConfirm = (w, h) => {
 }
 
 :deep(.ivu-input-number) {
-  width: 70px;
+  display: block;
+  width: 100%;
 }
 .form-wrap {
   display: flex;

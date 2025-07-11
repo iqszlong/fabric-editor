@@ -1,27 +1,27 @@
 <template>
   <div v-if="!isSelect">
     <div class="attr-item-box">
-      <!-- <h3>{{ $t('bgSeting.color') }}</h3> -->
-      <Divider plain orientation="left">
-        <h4>{{ $t('bgSeting.color') }}</h4>
-      </Divider>
-      <Form :label-width="0">
-        <FormItem prop="name">
-          <ColorPicker v-model="color" @on-change="setThisColor" alpha />
-        </FormItem>
-      </Form>
-      <!-- <Divider plain></Divider> -->
-    </div>
-    <div class="attr-item-box">
       <!-- <h3>{{ $t('bgSeting.colorMacthing') }}</h3> -->
       <Divider plain orientation="left">
-        <h4>{{ $t('bgSeting.colorMacthing') }}</h4>
+        <h4>{{ $t('bgSeting.color') }}</h4>
       </Divider>
       <div class="color-list">
         <template v-for="(item, i) in colorList" :key="item + i">
           <span :style="`background:${item}`" @click="setColor(item)"></span>
         </template>
       </div>
+    </div>
+    <div class="attr-item-box">
+      <!-- <h3>{{ $t('bgSeting.color') }}</h3> -->
+      <!-- <Divider plain orientation="left">
+        <h4>{{ $t('bgSeting.color') }}</h4>
+      </Divider> -->
+      <Form :label-width="0">
+        <FormItem prop="name">
+          <ColorPicker v-model="color" @on-change="setThisColor" alpha />
+        </FormItem>
+      </Form>
+      <!-- <Divider plain></Divider> -->
     </div>
 
     <!-- <div>
@@ -113,5 +113,8 @@ onUnmounted(() => {
     vertical-align: middle;
     cursor: pointer;
   }
+}
+.attr-item-box + .attr-item-box {
+  margin-top: 8px;
 }
 </style>

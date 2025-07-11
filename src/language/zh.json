@@ -1,10 +1,11 @@
 {
   "bgSeting": {
     "size": "尺寸",
-    "color": "颜色",
+    "color": "背景颜色",
     "colorMacthing": "配色",
     "width": "宽度",
-    "height": "高度"
+    "height": "高度",
+    "swap": "互换"
   },
   "flip": {
     "x": "水平翻转",
