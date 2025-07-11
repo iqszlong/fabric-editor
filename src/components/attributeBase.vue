@@ -4,6 +4,18 @@
     <div v-show="isMatchType">
       <Row :gutter="10">
         <Col flex="1">
+          <Input
+            v-model="baseAttr.name"
+            @on-change="(event) => changeCommon('name', event.target.value)"
+          >
+            <template #prepend>
+              <span>名称</span>
+            </template>
+          </Input>
+        </Col>
+      </Row>
+      <Row :gutter="10">
+        <Col flex="1">
           <InputNumber
             v-model="baseAttr.width"
             @on-change="(value) => changeCommon('width', value)"
@@ -62,6 +74,7 @@ const { isMatchType, canvasEditor, isOne } = useSelect(baseType);
 
 // 属性值
 const baseAttr = reactive({
+  name: '',
   width: 0,
   height: 0,
   scaleX: 1,
@@ -74,7 +87,7 @@ const getObjectAttr = (e) => {
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return;
   if (activeObject && isMatchType) {
-    console.log(`output->activeObject`, activeObject);
+    baseAttr.name = activeObject.get('name');
     baseAttr.width = activeObject.get('width');
     baseAttr.height = activeObject.get('height');
     baseAttr.scaleX = activeObject.get('scaleX');

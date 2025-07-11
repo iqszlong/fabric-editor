@@ -19,9 +19,9 @@
         >
           <Row class="ellipsis">
             <Col span="20">
-              <Tooltip :content="item.name || item.text || item.type" placement="left">
+              <Tooltip :content="textType(item.type, item)" placement="left">
                 <span :class="isSelect(item) && 'active'" v-html="iconType(item.type)"></span>
-                | {{ textType(item.type, item) }}
+                {{ item.name || item.text || textType(item.type, item) }}
               </Tooltip>
             </Col>
             <Col span="4">
@@ -30,6 +30,7 @@
                 :icon="item.isLock ? 'md-lock' : 'md-unlock'"
                 type="text"
                 @click="doLock(item)"
+                :key="item.isLock"
               ></Button>
             </Col>
           </Row>
@@ -149,13 +150,14 @@ const getList = () => {
   ]
     .reverse()
     .map((item) => {
-      const { type, id, name, text, selectable } = item;
+      console.log(`output->item`, item);
+      const { type, id, name, text, lockMovementX } = item;
       return {
         type,
         id,
         name,
         text,
-        isLock: !selectable,
+        isLock: lockMovementX,
       };
     });
   list.value = uniqBy(unref(list), 'id');

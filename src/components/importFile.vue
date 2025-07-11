@@ -58,8 +58,9 @@ const HANDLEMAP = {
   insertImg: function () {
     selectFiles({ accept: 'image/*', multiple: true }).then((fileList) => {
       Array.from(fileList).forEach((item) => {
+        const { name } = item;
         getImgStr(item).then((file) => {
-          insertImgFile(file);
+          insertImgFile(file, name);
         });
       });
     });
@@ -68,8 +69,9 @@ const HANDLEMAP = {
   insertSvg: function () {
     selectFiles({ accept: '.svg', multiple: true }).then((fileList) => {
       Array.from(fileList).forEach((item) => {
+        const { name } = item;
         getImgStr(item).then((file) => {
-          insertSvgFile(file);
+          insertSvgFile(file, name);
         });
       });
     });
@@ -98,7 +100,7 @@ const insertTypeHand = (type) => {
   cb && typeof cb === 'function' && cb();
 };
 // 插入图片文件
-function insertImgFile(file) {
+function insertImgFile(file, name = '') {
   if (!file) throw new Error('file is undefined');
   const imgEl = document.createElement('img');
   imgEl.src = file;
@@ -106,6 +108,7 @@ function insertImgFile(file) {
   document.body.appendChild(imgEl);
   imgEl.onload = async () => {
     const imgItem = await canvasEditor.createImgByElement(imgEl);
+    imgItem.name = name;
     canvasEditor.addBaseType(imgItem, {
       scale: false,
       center: true,
