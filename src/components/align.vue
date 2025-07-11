@@ -57,6 +57,31 @@
     </div>
     <!-- <Divider plain></Divider> -->
   </div>
+  <div v-else-if="isOne" class="attr-item-box">
+    <Divider plain orientation="left"><h4>对齐</h4></Divider>
+    <div class="bg-item">
+      <Tooltip :content="$t('attrSeting.align.left')">
+        <Button long @click="left" type="text">
+          <leftIcon />
+        </Button>
+      </Tooltip>
+      <Tooltip :content="$t('attrSeting.align.right')">
+        <Button long @click="right" type="text">
+          <rightIcon />
+        </Button>
+      </Tooltip>
+      <Tooltip :content="$t('attrSeting.align.top')">
+        <Button long @click="top" type="text">
+          <topIcon />
+        </Button>
+      </Tooltip>
+      <Tooltip :content="$t('attrSeting.align.bottom')">
+        <Button long @click="bottom" type="text">
+          <bottomIcon />
+        </Button>
+      </Tooltip>
+    </div>
+  </div>
 </template>
 
 <script name="Align" setup>
@@ -74,14 +99,22 @@ import syIcon from '@/assets/icon/sy.svg';
 import centerxIcon from '@/assets/icon/centerx.svg';
 import centeryIcon from '@/assets/icon/centery.svg';
 
-const { canvasEditor, isMultiple } = useSelect();
+const { canvasEditor, isMultiple, isOne } = useSelect();
 
 // 左对齐
 const left = () => {
+  if (isOne) {
+    setValue('left');
+    return;
+  }
   canvasEditor.left();
 };
 // 右对齐
 const right = () => {
+  if (isOne) {
+    setValue('right');
+    return;
+  }
   canvasEditor.right();
 };
 // 水平居中对齐
@@ -94,10 +127,18 @@ const ycenter = () => {
 };
 // 顶部对齐
 const top = () => {
+  if (isOne) {
+    setValue('top');
+    return;
+  }
   canvasEditor.top();
 };
 // 底部对齐
 const bottom = () => {
+  if (isOne) {
+    setValue('bottom');
+    return;
+  }
   canvasEditor.bottom();
 };
 // 水平平均对齐
@@ -108,11 +149,28 @@ const xequation = () => {
 const yequation = () => {
   canvasEditor.yequation();
 };
+
+const setValue = (key, value = 0) => {
+  const activeObject = canvasEditor.canvas.getActiveObject();
+  // console.log(canvasEditor.getWorkspase());
+  const size = canvasEditor.getWorkspase();
+  const { width, height } = size || {};
+  if (key === 'right') {
+    value = width - activeObject.getScaledWidth();
+    key = 'left';
+  }
+  if (key === 'bottom') {
+    value = height - activeObject.getScaledHeight();
+    key = 'top';
+  }
+  activeObject && activeObject.set(key, value);
+  canvasEditor.canvas.renderAll();
+};
 </script>
 
 <style scoped lang="less">
 .icon {
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  height: 24px;
 }
 </style>

@@ -9,11 +9,11 @@
 <template>
   <div v-if="isSelect" class="attr-item-box">
     <!-- <h3>{{ $t('attrSeting.centerAlign.name') }}</h3> -->
-    <Divider plain orientation="left">
+    <!-- <Divider plain orientation="left">
       <h4>{{ $t('attrSeting.centerAlign.name') }}</h4>
-    </Divider>
+    </Divider> -->
     <div class="bg-item">
-      <!-- 水平集中 -->
+      <!-- 水平居中 -->
       <Tooltip :content="$t('attrSeting.centerAlign.centerX')">
         <Button long @click="position('centerH')" type="text">
           <centerX width="14" height="14"></centerX>
@@ -58,5 +58,8 @@ const position = (name) => {
 }
 svg {
   vertical-align: text-bottom;
+}
+.attr-item-box {
+  margin-top: 8px;
 }
 </style>

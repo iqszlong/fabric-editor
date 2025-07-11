@@ -17,12 +17,16 @@
           :key="item.id"
           :class="isSelect(item) && 'active'"
         >
-          <Row class="ellipsis">
+          <Row>
             <Col span="20">
-              <Tooltip :content="textType(item.type, item)" placement="left">
-                <span :class="isSelect(item) && 'active'" v-html="iconType(item.type)"></span>
-                {{ item.name || item.text || textType(item.type, item) }}
-              </Tooltip>
+              <div class="title">
+                <Tooltip :content="item.name || item.text" placement="right-start" max-width="200">
+                  <span :class="isSelect(item) && 'active'" v-html="iconType(item.type)"></span>
+                </Tooltip>
+                <div class="ellipsis">
+                  {{ item.name || item.text || textType(item.type, item) }}
+                </div>
+              </div>
             </Col>
             <Col span="4">
               <Button
@@ -150,7 +154,6 @@ const getList = () => {
   ]
     .reverse()
     .map((item) => {
-      console.log(`output->item`, item);
       const { type, id, name, text, lockMovementX } = item;
       return {
         type,
@@ -195,6 +198,10 @@ onMounted(() => {
   height: calc(100vh - 170px);
   overflow-y: auto;
   margin-bottom: 5px;
+  .title {
+    display: flex;
+    gap: 4px;
+  }
   .ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -212,7 +219,9 @@ onMounted(() => {
     &.active {
       color: #2d8cf0;
       background: #f0faff;
-      font-weight: bold;
+      .ellipsis {
+        font-weight: bold;
+      }
     }
   }
 }

@@ -105,6 +105,8 @@ const switchAttrBar = () => {
           <cropperImg></cropperImg>
           <!-- 图片裁切 -->
           <clip-image></clip-image>
+          <!-- 组对齐方式 -->
+          <align></align>
           <!-- 居中对齐 -->
           <center-align></center-align>
           <!-- 翻转 -->
