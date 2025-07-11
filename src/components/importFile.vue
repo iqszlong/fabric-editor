@@ -107,7 +107,8 @@ function insertImgFile(file) {
   imgEl.onload = async () => {
     const imgItem = await canvasEditor.createImgByElement(imgEl);
     canvasEditor.addBaseType(imgItem, {
-      scale: true,
+      scale: false,
+      center: true,
     });
     imgEl.remove();
   };
