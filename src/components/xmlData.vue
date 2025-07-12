@@ -1,6 +1,6 @@
 <template>
   <div v-if="isOne" class="box attr-item-box">
-    <Divider plain orientation="left"><h4>XML</h4></Divider>
+    <Divider plain orientation="left" size="small"><h4>XML</h4></Divider>
     <Space direction="vertical" type="flex">
       <Select v-model="coordinate" @on-change="setXmlCode">
         <template #prefix>坐标基准：</template>

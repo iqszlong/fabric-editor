@@ -9,7 +9,7 @@
 <template>
   <div class="box attr-item-box" v-if="isOne">
     <!-- <h3>阴影</h3> -->
-    <Divider plain orientation="left"><h4>阴影</h4></Divider>
+    <Divider plain orientation="left" size="small"><h4>阴影</h4></Divider>
     <!-- 通用属性 -->
     <div>
       <Row :gutter="10">
@@ -17,7 +17,12 @@
           <div class="ivu-col__box">
             <span class="label">{{ $t('color') }}</span>
             <div class="content">
-              <ColorPicker v-model="baseAttr.shadow.color" @on-change="changeCommon" alpha />
+              <ColorPicker
+                v-model="baseAttr.shadow.color"
+                @on-change="changeCommon"
+                alpha
+                transfer
+              />
             </div>
           </div>
         </Col>

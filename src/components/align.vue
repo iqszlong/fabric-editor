@@ -7,75 +7,71 @@
 -->
 
 <template>
-  <div v-if="isMultiple" class="attr-item-box">
-    <!-- <h3>对齐</h3> -->
+  <div class="attr-item-box">
     <Divider plain orientation="left" size="small"><h4>对齐</h4></Divider>
-    <div class="bg-item">
+    <div class="bg-item" v-if="isMultiple">
       <!-- 水平对齐 -->
-      <Tooltip :content="$t('attrSeting.align.left')">
+      <Tooltip :content="$t('attrSeting.align.left')" transfer>
         <Button @click="left" size="small" type="text">
           <leftIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.centerX')">
+      <Tooltip :content="$t('attrSeting.align.centerX')" transfer>
         <Button @click="xcenter" size="small" type="text">
           <centerxIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.right')">
+      <Tooltip :content="$t('attrSeting.align.right')" transfer>
         <Button @click="right" size="small" type="text">
           <rightIcon />
         </Button>
       </Tooltip>
       <!-- 垂直对齐 -->
-      <Tooltip :content="$t('attrSeting.align.top')">
+      <Tooltip :content="$t('attrSeting.align.top')" transfer>
         <Button @click="top" size="small" type="text">
           <topIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.centerY')">
+      <Tooltip :content="$t('attrSeting.align.centerY')" transfer>
         <Button @click="ycenter" size="small" type="text">
           <centeryIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.bottom')">
+      <Tooltip :content="$t('attrSeting.align.bottom')" transfer>
         <Button @click="bottom" size="small" type="text">
           <bottomIcon />
         </Button>
       </Tooltip>
       <!-- 平均对齐 -->
-      <Tooltip :content="$t('attrSeting.align.averageX')">
+      <Tooltip :content="$t('attrSeting.align.averageX')" transfer>
         <Button @click="xequation" size="small" type="text">
           <sxIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.averageY')">
+      <Tooltip :content="$t('attrSeting.align.averageY')" transfer>
         <Button @click="yequation" size="small" type="text">
           <syIcon />
         </Button>
       </Tooltip>
     </div>
-    <!-- <Divider plain></Divider> -->
-  </div>
-  <div v-else-if="isOne" class="attr-item-box">
-    <Divider plain orientation="left" size="small"><h4>对齐</h4></Divider>
-    <div class="bg-item">
-      <Tooltip :content="$t('attrSeting.align.left')">
+
+    <div v-else-if="isOne" class="bg-item">
+      <Tooltip :content="$t('attrSeting.align.left')" transfer>
         <Button long @click="left" type="text">
           <leftIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.right')">
+      <Tooltip :content="$t('attrSeting.align.right')" transfer>
         <Button long @click="right" type="text">
           <rightIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.top')">
+      <Tooltip :content="$t('attrSeting.align.top')" transfer>
         <Button long @click="top" type="text">
           <topIcon />
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.align.bottom')">
+      <Tooltip :content="$t('attrSeting.align.bottom')" transfer>
         <Button long @click="bottom" type="text">
           <bottomIcon />
         </Button>

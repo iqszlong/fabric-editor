@@ -8,37 +8,31 @@
 
 <template>
   <div class="box attr-item-box" v-if="isOne">
-    <!-- <h3>数据</h3> -->
-    <Divider plain orientation="left"><h4>数据</h4></Divider>
+    <Divider plain orientation="left" size="small"><h4>数据</h4></Divider>
+    <Space direction="vertical" type="flex">
+      <Input v-model="baseAttr.id" @on-change="changeCommon('id', baseAttr.id)">
+        <template #prepend>
+          <span>{{ $t('attributes.id') }}</span>
+        </template>
+      </Input>
 
-    <Form :label-width="40" class="form-wrap">
-      <FormItem :label="$t('attributes.id')">
-        <Input
-          v-model="baseAttr.id"
-          @on-change="changeCommon('id', baseAttr.id)"
-          size="small"
-        ></Input>
-      </FormItem>
-    </Form>
-
-    <Row :gutter="10">
-      <Col flex="1">
-        <Select
-          v-model="baseAttr.linkData[0]"
-          filterable
-          allow-create
-          @on-change="changeCommon('linkData', baseAttr.linkData)"
-        >
-          <Option value="src"></Option>
-          <Option value="text"></Option>
-        </Select>
-      </Col>
-      <Col flex="1">
-        <Input v-model="baseAttr.linkData[1]" placeholder="请输入" />
-      </Col>
-    </Row>
-
-    <!-- <Divider plain></Divider> -->
+      <Row :gutter="10">
+        <Col flex="1">
+          <Select
+            v-model="baseAttr.linkData[0]"
+            filterable
+            allow-create
+            @on-change="changeCommon('linkData', baseAttr.linkData)"
+          >
+            <Option value="src"></Option>
+            <Option value="text"></Option>
+          </Select>
+        </Col>
+        <Col flex="1">
+          <Input v-model="baseAttr.linkData[1]" placeholder="请输入" />
+        </Col>
+      </Row>
+    </Space>
   </div>
 </template>
 
@@ -97,16 +91,5 @@ onBeforeUnmount(() => {
 :deep(.ivu-input-number) {
   display: block;
   width: 100%;
-}
-
-.ivu-form-item {
-  background: #f6f7f9;
-  border-radius: 5px;
-  padding: 0 5px;
-  margin-bottom: 10px;
-}
-
-.ivu-row {
-  margin-bottom: 10px;
 }
 </style>

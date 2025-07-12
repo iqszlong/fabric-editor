@@ -81,21 +81,23 @@ const switchAttrBar = () => {
       </div>
       <Tabs :animated="false" size="small">
         <TabPane label="属性">
-          <attributeBase></attributeBase>
-          <!-- 位置信息 -->
-          <attributePostion></attributePostion>
-          <!-- 颜色 -->
-          <attributeColor></attributeColor>
-          <!-- 字体属性 -->
-          <attributeFont></attributeFont>
-          <!-- 字体小数点 -->
-          <attributeTextFloat></attributeTextFloat>
-          <!-- 文字内容  -->
-          <attribute-text-content></attribute-text-content>
-          <!-- 条形码属性 -->
-          <attributeBarcode></attributeBarcode>
-          <!-- 二维码 -->
-          <attributeQrCode></attributeQrCode>
+          <Space direction="vertical" type="flex">
+            <attributeBase></attributeBase>
+            <!-- 位置信息 -->
+            <attributePostion></attributePostion>
+            <!-- 颜色 -->
+            <attributeColor></attributeColor>
+            <!-- 字体属性 -->
+            <attributeFont></attributeFont>
+            <!-- 字体小数点 -->
+            <attributeTextFloat></attributeTextFloat>
+            <!-- 文字内容  -->
+            <attribute-text-content></attribute-text-content>
+            <!-- 条形码属性 -->
+            <attributeBarcode></attributeBarcode>
+            <!-- 二维码 -->
+            <attributeQrCode></attributeQrCode>
+          </Space>
         </TabPane>
         <TabPane label="调整">
           <Space direction="vertical" type="flex">
@@ -114,26 +116,30 @@ const switchAttrBar = () => {
           </Space>
         </TabPane>
         <TabPane label="装饰">
-          <!-- 阴影 -->
-          <attributeShadow></attributeShadow>
-          <!-- 边框 -->
-          <attributeBorder></attributeBorder>
-          <!-- 圆角 -->
-          <attributeRounded></attributeRounded>
+          <Space direction="vertical" type="flex">
+            <!-- 阴影 -->
+            <attributeShadow></attributeShadow>
+            <!-- 边框 -->
+            <attributeBorder></attributeBorder>
+            <!-- 圆角 -->
+            <attributeRounded></attributeRounded>
 
-          <!-- 图片滤镜 -->
-          <filters></filters>
-          <!-- 图片描边 -->
-          <imgStroke />
+            <!-- 图片滤镜 -->
+            <filters></filters>
+            <!-- 图片描边 -->
+            <imgStroke />
+          </Space>
         </TabPane>
 
         <TabPane label="数据">
-          <!-- 关联数据 -->
-          <attributeId></attributeId>
-          <!-- 新增字体样式使用 -->
-          <Button @click="canvasEditor.getFontJson()" size="small">获取元素数据</Button>
+          <Space direction="vertical" type="flex">
+            <!-- 关联数据 -->
+            <attributeId></attributeId>
+            <!-- 新增字体样式使用 -->
+            <Button @click="canvasEditor.getFontJson()" long>获取元素数据</Button>
 
-          <xmlData></xmlData>
+            <xmlData></xmlData>
+          </Space>
         </TabPane>
       </Tabs>
 
@@ -178,9 +184,6 @@ const switchAttrBar = () => {
     text-align: center;
     flex: 1;
   }
-}
-.ivu-tabs {
-  overflow: visible;
 }
 
 // 关闭按钮

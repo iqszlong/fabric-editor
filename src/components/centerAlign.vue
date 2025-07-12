@@ -9,24 +9,24 @@
 <template>
   <div v-if="isSelect" class="attr-item-box">
     <!-- <h3>{{ $t('attrSeting.centerAlign.name') }}</h3> -->
-    <!-- <Divider plain orientation="left">
+    <!-- <Divider plain orientation="left" size="small">
       <h4>{{ $t('attrSeting.centerAlign.name') }}</h4>
     </Divider> -->
     <div class="bg-item">
       <!-- 水平居中 -->
-      <Tooltip :content="$t('attrSeting.centerAlign.centerX')">
+      <Tooltip :content="$t('attrSeting.centerAlign.centerX')" transfer>
         <Button long @click="position('centerH')" type="text">
           <centerX width="14" height="14"></centerX>
         </Button>
       </Tooltip>
       <!-- 水平垂直居中 -->
-      <Tooltip :content="$t('attrSeting.centerAlign.center')">
+      <Tooltip :content="$t('attrSeting.centerAlign.center')" transfer>
         <Button long @click="position('center')" type="text">
           <centerIcon width="14" height="14"></centerIcon>
         </Button>
       </Tooltip>
       <!-- 垂直居中 -->
-      <Tooltip :content="$t('attrSeting.centerAlign.centerY')">
+      <Tooltip :content="$t('attrSeting.centerAlign.centerY')" transfer>
         <Button long @click="position('centerV')" type="text">
           <centerY width="14" height="14"></centerY>
         </Button>

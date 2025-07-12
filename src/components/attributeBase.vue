@@ -20,6 +20,7 @@
             v-model="baseAttr.width"
             @on-change="(value) => changeCommon('width', value)"
             :append="$t('attributes.width')"
+            disabled
           ></InputNumber>
         </Col>
         <Col flex="1">
@@ -27,6 +28,7 @@
             v-model="baseAttr.height"
             @on-change="(value) => changeCommon('height', value)"
             :append="$t('attributes.height')"
+            disabled
           ></InputNumber>
         </Col>
       </Row>

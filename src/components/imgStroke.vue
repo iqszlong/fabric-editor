@@ -1,7 +1,7 @@
 <template>
   <div class="box" v-if="isOne && isImage">
     <!-- <Divider plain orientation="left">图像描边</Divider> -->
-    <Divider plain orientation="left">
+    <Divider plain orientation="left" size="small">
       <h4>图像描边</h4>
     </Divider>
     <div class="hd-wrap">

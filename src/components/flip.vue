@@ -9,16 +9,16 @@
 <template>
   <div v-if="isOne" class="attr-item-box">
     <!-- <h3>{{ $t('attrSeting.flip.name') }}</h3> -->
-    <!-- <Divider plain orientation="left">
+    <!-- <Divider plain orientation="left" size="small">
       <h4>{{ $t('attrSeting.flip.name') }}</h4>
     </Divider> -->
     <div class="bg-item">
-      <Tooltip :content="$t('attrSeting.flip.x')">
+      <Tooltip :content="$t('attrSeting.flip.x')" transfer>
         <Button long @click="flip('X')" type="text">
           <flipX width="14" height="14"></flipX>
         </Button>
       </Tooltip>
-      <Tooltip :content="$t('attrSeting.flip.y')">
+      <Tooltip :content="$t('attrSeting.flip.y')" transfer>
         <Button long @click="flip('Y')" type="text">
           <flipY width="14" height="14"></flipY>
         </Button>

@@ -8,7 +8,7 @@
 
 <template>
   <div v-if="isOne && state.type === 'image'" class="box">
-    <Divider plain orientation="left">
+    <Divider plain orientation="left" size="small">
       <h4>图片滤镜</h4>
     </Divider>
     <Collapse>
