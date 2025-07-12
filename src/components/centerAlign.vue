@@ -59,7 +59,4 @@ const position = (name) => {
 svg {
   vertical-align: text-bottom;
 }
-.attr-item-box {
-  margin-top: 8px;
-}
 </style>

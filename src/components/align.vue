@@ -9,7 +9,7 @@
 <template>
   <div v-if="isMultiple" class="attr-item-box">
     <!-- <h3>对齐</h3> -->
-    <Divider plain orientation="left"><h4>对齐</h4></Divider>
+    <Divider plain orientation="left" size="small"><h4>对齐</h4></Divider>
     <div class="bg-item">
       <!-- 水平对齐 -->
       <Tooltip :content="$t('attrSeting.align.left')">
@@ -58,7 +58,7 @@
     <!-- <Divider plain></Divider> -->
   </div>
   <div v-else-if="isOne" class="attr-item-box">
-    <Divider plain orientation="left"><h4>对齐</h4></Divider>
+    <Divider plain orientation="left" size="small"><h4>对齐</h4></Divider>
     <div class="bg-item">
       <Tooltip :content="$t('attrSeting.align.left')">
         <Button long @click="left" type="text">

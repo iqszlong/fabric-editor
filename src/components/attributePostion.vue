@@ -10,7 +10,7 @@
     <!-- <h3>位置信息</h3> -->
     <Divider plain orientation="left"><h4>位置信息</h4></Divider>
     <!-- 通用属性 -->
-    <div v-show="isMatchType">
+    <Space direction="vertical" type="flex" v-show="isMatchType">
       <Row :gutter="10">
         <Col flex="1">
           <InputNumber
@@ -43,6 +43,7 @@
           ></InputNumber>
         </Col>
       </Row>
+      <Button long @click="xyTointeger">{{ $t('attributes.to_integer') }}</Button>
       <Form :label-width="40" class="form-wrap">
         <FormItem :label="$t('attributes.angle')">
           <Slider
@@ -58,7 +59,7 @@
           ></Slider>
         </FormItem>
       </Form>
-    </div>
+    </Space>
     <!-- <Divider plain></Divider> -->
   </div>
 </template>
@@ -117,12 +118,11 @@ const getObjectAttr = (e) => {
 // 通用属性改变
 const changeCommon = (key, value) => {
   const activeObject = canvasEditor.canvas.getActiveObjects()[0];
+  // const center = canvasEditor.canvas.getCenterPoint();
   if (activeObject) {
     // 透明度特殊转换
     if (key === 'opacity') {
-      activeObject && activeObject.set(key, value / 100);
-      canvasEditor.canvas.renderAll();
-      return;
+      value = value / 100;
     }
     // 旋转角度适配
     if (key === 'angle') {
@@ -130,18 +130,16 @@ const changeCommon = (key, value) => {
       canvasEditor.canvas.renderAll();
       return;
     }
-    if (key === 'cleft') {
-      const center = canvasEditor.canvas.getCenterPoint();
-      activeObject && activeObject.set('left', value + center.x);
-      canvasEditor.canvas.renderAll();
-      return;
-    }
-    if (key === 'ctop') {
-      const center = canvasEditor.canvas.getCenterPoint();
-      activeObject && activeObject.set('top', value + center.y);
-      canvasEditor.canvas.renderAll();
-      return;
-    }
+    // if (key === 'cleft') {
+    //   // key = 'left';
+    //   value = value + center.x;
+    // }
+    // if (key === 'ctop') {
+    //   // key = 'top';
+    //   value = value + center.y;
+    // }
+    console.log(key, value);
+
     activeObject && activeObject.set(key, value);
     canvasEditor.canvas.renderAll();
   }
@@ -149,6 +147,17 @@ const changeCommon = (key, value) => {
 
 const selectCancel = () => {
   update?.proxy?.$forceUpdate();
+};
+
+const xyTointeger = () => {
+  baseAttr.left = Math.round(baseAttr.left);
+  baseAttr.top = Math.round(baseAttr.top);
+  baseAttr.cLeft = Math.round(baseAttr.cLeft);
+  baseAttr.cTop = Math.round(baseAttr.cTop);
+  changeCommon('left', baseAttr.left);
+  changeCommon('top', baseAttr.top);
+  changeCommon('cleft', baseAttr.cLeft);
+  changeCommon('ctop', baseAttr.cTop);
 };
 
 onMounted(() => {
@@ -176,10 +185,6 @@ onBeforeUnmount(() => {
   background: #f6f7f9;
   border-radius: 5px;
   padding: 0 5px;
-  margin-bottom: 10px;
-}
-
-.ivu-row {
   margin-bottom: 10px;
 }
 </style>

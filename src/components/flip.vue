@@ -51,8 +51,4 @@ const flip = (type) => {
     }
   }
 }
-
-.attr-item-box {
-  margin-top: 8px;
-}
 </style>

@@ -229,7 +229,8 @@
     "scale_x": "缩放X",
     "scale_y": "缩放Y",
     "c_left": "中X",
-    "c_top": "中Y"
+    "c_top": "中Y",
+    "to_integer": "坐标数值取整"
   },
   "setSizeTip": "调整画布尺寸",
   "tip": "提示",

@@ -67,11 +67,9 @@ const switchAttrBar = () => {
     </div>
 
     <div v-show="mixinState.mSelectMode === 'one'" class="attr-item-box">
-      <!-- <h3>快捷操作</h3> -->
       <!-- 分组 -->
       <group></group>
-      <!-- <Divider plain></Divider> -->
-      <Divider plain orientation="left">
+      <Divider plain orientation="left" size="small">
         <h4>快捷操作</h4>
       </Divider>
       <div class="bg-item" v-show="mixinState.mSelectMode">
@@ -100,18 +98,20 @@ const switchAttrBar = () => {
           <attributeQrCode></attributeQrCode>
         </TabPane>
         <TabPane label="调整">
-          <!-- 替换图片 -->
-          <replaceImg></replaceImg>
-          <!-- 裁剪 -->
-          <cropperImg></cropperImg>
-          <!-- 图片裁切 -->
-          <clip-image></clip-image>
-          <!-- 组对齐方式 -->
-          <align></align>
-          <!-- 居中对齐 -->
-          <center-align></center-align>
-          <!-- 翻转 -->
-          <flip></flip>
+          <Space direction="vertical" type="flex">
+            <!-- 替换图片 -->
+            <replaceImg></replaceImg>
+            <!-- 裁剪 -->
+            <cropperImg></cropperImg>
+            <!-- 图片裁切 -->
+            <clip-image></clip-image>
+            <!-- 组对齐方式 -->
+            <align></align>
+            <!-- 居中对齐 -->
+            <center-align></center-align>
+            <!-- 翻转 -->
+            <flip></flip>
+          </Space>
         </TabPane>
         <TabPane label="装饰">
           <!-- 阴影 -->
@@ -157,6 +157,10 @@ const switchAttrBar = () => {
   padding: 10px;
   overflow-y: auto;
   background: #fff;
+
+  > div {
+    height: 100%;
+  }
 }
 
 // 属性面板样式
@@ -174,6 +178,9 @@ const switchAttrBar = () => {
     text-align: center;
     flex: 1;
   }
+}
+.ivu-tabs {
+  overflow: visible;
 }
 
 // 关闭按钮

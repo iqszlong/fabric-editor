@@ -1,7 +1,7 @@
 <template>
   <div class="box attr-item-box" v-if="isOne">
-    <Divider plain orientation="left"><h4>基本属性</h4></Divider>
-    <div v-show="isMatchType">
+    <Divider plain orientation="left" size="small"><h4>基本属性</h4></Divider>
+    <Space direction="vertical" type="flex" v-show="isMatchType">
       <Row :gutter="10">
         <Col flex="1">
           <Input
@@ -46,7 +46,7 @@
           ></InputNumber>
         </Col>
       </Row>
-    </div>
+    </Space>
   </div>
 </template>
 
@@ -127,8 +127,5 @@ onBeforeUnmount(() => {
 :deep(.ivu-input-number) {
   display: block;
   width: 100%;
-}
-.ivu-row {
-  margin-bottom: 10px;
 }
 </style>

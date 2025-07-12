@@ -64,8 +64,4 @@ onBeforeUnmount(() => {
   canvasEditor.off('selectOne', init);
 });
 </script>
-<style lang="less" scoped>
-.attr-item-box {
-  margin-top: 8px;
-}
-</style>
+<style lang="less" scoped></style>
