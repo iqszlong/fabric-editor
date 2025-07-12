@@ -527,10 +527,7 @@ defineExpose({
       flex-shrink: 0;
       padding: 0 10px;
       user-select: none;
-
-      & :not(.@{input-number-prefix-cls}-disabled) {
-        cursor: ew-resize;
-      }
+      cursor: ew-resize;
     }
   }
 
@@ -553,6 +550,12 @@ defineExpose({
       &-down-inner {
         line-height: (@input-height-large / 2);
       }
+    }
+  }
+
+  &-disabled {
+    .@{input-number-prefix-cls}-input-wrap__label {
+      cursor: default !important;
     }
   }
 }
