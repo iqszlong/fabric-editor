@@ -101,7 +101,7 @@ const baseAttr = reactive({
 // 属性获取
 const getObjectAttr = (e) => {
   const activeObject = canvasEditor.canvas.getActiveObject();
-  const center = getCenterPoint();
+  const center = canvasEditor.canvas.getCenterPoint();
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return;
   if (activeObject && isMatchType) {
@@ -112,12 +112,6 @@ const getObjectAttr = (e) => {
     baseAttr.cTop = activeObject.get('top') - center.y;
     baseAttr.cLeft = activeObject.get('left') - center.x;
   }
-};
-
-const getCenterPoint = () => {
-  const size = canvasEditor.getWorkspase();
-  const { width: w, height: h } = size || {};
-  return { x: w / 2, y: h / 2 };
 };
 
 // 通用属性改变
@@ -137,13 +131,13 @@ const changeCommon = (key, value) => {
       return;
     }
     if (key === 'cleft') {
-      const center = getCenterPoint();
+      const center = canvasEditor.canvas.getCenterPoint();
       activeObject && activeObject.set('left', value + center.x);
       canvasEditor.canvas.renderAll();
       return;
     }
     if (key === 'ctop') {
-      const center = getCenterPoint();
+      const center = canvasEditor.canvas.getCenterPoint();
       activeObject && activeObject.set('top', value + center.y);
       canvasEditor.canvas.renderAll();
       return;
