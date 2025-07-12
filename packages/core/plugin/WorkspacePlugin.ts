@@ -45,6 +45,7 @@ class WorkspacePlugin implements IPluginTempl {
   resizeObserver!: ResizeObserver;
   option: any;
   zoomRatio: number;
+  zoomAuto: boolean;
   constructor(public canvas: fabric.Canvas, public editor: IEditor) {
     this.workspace = null;
     this.init({
@@ -52,6 +53,7 @@ class WorkspacePlugin implements IPluginTempl {
       height: 1920,
     });
     this.zoomRatio = 0.85;
+    this.zoomAuto = true;
   }
 
   init(option: { width: number; height: number }) {
@@ -145,7 +147,7 @@ class WorkspacePlugin implements IPluginTempl {
   _initResizeObserve() {
     const resizeObserver = new ResizeObserver(
       throttle(() => {
-        this.auto();
+        if (this.zoomAuto) this.auto();
       }, 50)
     );
     this.resizeObserver = resizeObserver;
@@ -199,6 +201,7 @@ class WorkspacePlugin implements IPluginTempl {
     zoomRatio += 0.05;
     const center = this.canvas.getCenter();
     this.canvas.zoomToPoint(new fabric.Point(center.left, center.top), zoomRatio);
+    this.zoomAuto = false;
   }
 
   // 缩小
@@ -210,18 +213,21 @@ class WorkspacePlugin implements IPluginTempl {
       new fabric.Point(center.left, center.top),
       zoomRatio < 0 ? 0.01 : zoomRatio
     );
+    this.zoomAuto = false;
   }
 
   // 自动缩放
   auto() {
     const scale = this._getScale();
     this.setZoomAuto(scale * this.zoomRatio);
+    this.zoomAuto = true;
   }
 
   // 1:1 放大
   one() {
     this.setZoomAuto(1 * this.zoomRatio);
     this.canvas.requestRenderAll();
+    this.zoomAuto = false;
   }
 
   setWorkspaseBg(color: string) {
