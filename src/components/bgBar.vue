@@ -6,9 +6,14 @@
         <h4>{{ $t('bgSeting.color') }}</h4>
       </Divider>
       <div class="color-list">
-        <template v-for="(item, i) in colorList" :key="item + i">
-          <span :style="`background:${item}`" @click="setColor(item)"></span>
-        </template>
+        <div
+          class="item"
+          v-for="(item, i) in colorList"
+          :key="item + i"
+          :style="`background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);`"
+        >
+          <span :style="`background-color:${item}`" @click="setColor(item)"></span>
+        </div>
       </div>
     </div>
     <div class="attr-item-box">
@@ -41,6 +46,7 @@ import useSelect from '@/hooks/select';
 const { isSelect, canvasEditor } = useSelect();
 
 const colorList = ref([
+  '#00000000',
   '#000000',
   '#FFFFFF',
   '#F5F5F5',
@@ -124,14 +130,20 @@ onUnmounted(() => {
 .color-list {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
-  span {
+  .item {
     height: 20px;
     width: 20px;
     border-radius: 15px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-    vertical-align: middle;
     cursor: pointer;
+    overflow: hidden;
+  }
+  span {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 .attr-item-box + .attr-item-box {
