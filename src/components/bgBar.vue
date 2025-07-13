@@ -2,7 +2,7 @@
   <div v-if="!isSelect">
     <div class="attr-item-box">
       <!-- <h3>{{ $t('bgSeting.colorMacthing') }}</h3> -->
-      <Divider plain orientation="left">
+      <Divider plain orientation="left" size="small">
         <h4>{{ $t('bgSeting.color') }}</h4>
       </Divider>
       <div class="color-list">
@@ -18,7 +18,7 @@
       </Divider> -->
       <Form :label-width="0">
         <FormItem prop="name">
-          <ColorPicker v-model="color" @on-change="setThisColor" alpha />
+          <ColorPicker v-model="color" @on-change="setThisColor" alpha transfer />
         </FormItem>
       </Form>
       <!-- <Divider plain></Divider> -->
@@ -41,6 +41,25 @@ import useSelect from '@/hooks/select';
 const { isSelect, canvasEditor } = useSelect();
 
 const colorList = ref([
+  '#000000',
+  '#FFFFFF',
+  '#F5F5F5',
+  '#E0E0E0',
+  '#C6C6C6',
+  '#B3B3B3',
+  '#999999',
+  '#808080',
+  '#666666',
+  '#4D4D4D',
+  '#333333',
+  '#1A1A1A',
+  '#FF0000',
+  '#FF7F00',
+  '#FFFF00',
+  '#00FF00',
+  '#0000FF',
+  '#4B0082',
+  '#9400D3',
   '#5F2B63',
   '#B23554',
   '#F27E56',
@@ -105,11 +124,12 @@ onUnmounted(() => {
 .color-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 8px;
   span {
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 15px;
-    border: 3px solid #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
     vertical-align: middle;
     cursor: pointer;
   }

@@ -118,7 +118,7 @@ const getObjectAttr = (e) => {
 // 通用属性改变
 const changeCommon = (key, value) => {
   const activeObject = canvasEditor.canvas.getActiveObjects()[0];
-  // const center = canvasEditor.canvas.getCenterPoint();
+  const center = canvasEditor.canvas.getCenterPoint();
   if (activeObject) {
     // 透明度特殊转换
     if (key === 'opacity') {
@@ -130,14 +130,14 @@ const changeCommon = (key, value) => {
       canvasEditor.canvas.renderAll();
       return;
     }
-    // if (key === 'cleft') {
-    //   // key = 'left';
-    //   value = value + center.x;
-    // }
-    // if (key === 'ctop') {
-    //   // key = 'top';
-    //   value = value + center.y;
-    // }
+    if (key === 'cleft') {
+      // key = 'left';
+      value = value + center.x;
+    }
+    if (key === 'ctop') {
+      // key = 'top';
+      value = value + center.y;
+    }
     console.log(key, value);
 
     activeObject && activeObject.set(key, value);

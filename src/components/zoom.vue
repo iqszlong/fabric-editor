@@ -44,7 +44,7 @@ const setViewport = () => {
 .box {
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  top: 10px;
 
   :deep(.ivu-btn:hover) {
     svg {

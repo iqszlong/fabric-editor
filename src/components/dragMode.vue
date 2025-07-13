@@ -10,7 +10,7 @@
   <div class="box">
     <Switch size="large" v-model="status" @on-change="switchMode">
       <template #open>
-        <span>Drag</span>
+        <span>拖拽</span>
       </template>
     </Switch>
   </div>
@@ -43,6 +43,6 @@ onBeforeUnmount(() => {
 .box {
   position: absolute;
   right: 193px;
-  bottom: 14px;
+  top: 16px;
 }
 </style>
