@@ -113,7 +113,6 @@ const beforeClearTip = (info) => {
 
 onMounted(() => {
   startPage();
-  getTemplInfo();
 });
 
 // 获取模板数据
@@ -128,17 +127,6 @@ const getTempData = async (info) => {
     router.replace('/?tempId=' + info.id);
   }
   canvasEditor.loadJSON(JSON.stringify(infoRes.data.data.attributes.json), Spin.hide);
-};
-
-const getTemplInfo = async () => {
-  if (route.query.tempId) {
-    try {
-      const infoRes = await getInfo(route.query.tempId);
-      canvasEditor.loadJSON(JSON.stringify(infoRes.data.data.attributes.json), Spin.hide);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 };
 
 const changeSelectType = debounce(() => {

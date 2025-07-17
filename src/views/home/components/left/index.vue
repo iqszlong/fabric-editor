@@ -6,11 +6,26 @@ import myMaterial from '@/components/myMaterial/index.vue';
 import tools from '@/components/tools.vue';
 import material from '@/components/material.vue';
 import layer from '@/components/layer.vue';
+import useSelect from '@/hooks/select';
+import usePageList from '@/hooks/pageList';
+import { Spin } from 'view-ui-plus';
 import { useI18n } from 'vue-i18n';
 // 路由
 import { useRoute } from 'vue-router';
 
 const { t } = useI18n();
+
+const { canvasEditor } = useSelect();
+
+const { getInfo } = usePageList({
+  typeUrl: 'templ-types',
+  listUrl: 'templs',
+  searchTypeKey: 'templ_type',
+  searchWordKey: 'name',
+  pageSize: 10,
+  scrollElement: '#myTemplBox',
+  fields: ['name'],
+});
 
 const state = reactive({
   menuActive: 1,
@@ -87,7 +102,20 @@ onMounted(() => {
   if (route?.query?.id) {
     menuActive.value = 'myMaterial';
   }
+  getTemplInfo();
 });
+
+const getTemplInfo = async () => {
+  const route = useRoute();
+  if (route.query.tempId) {
+    try {
+      const infoRes = await getInfo(route.query.tempId);
+      canvasEditor.loadJSON(JSON.stringify(infoRes.data.data.attributes.json), Spin.hide);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 </script>
 
 <template>
