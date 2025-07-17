@@ -27,7 +27,7 @@ import useSelect from '@/hooks/select';
 
 const update = getCurrentInstance();
 // 可监听的元素
-const baseType = ['text', 'textbox', 'image', 'group'];
+const baseType = ['i-text', 'textbox', 'image', 'group'];
 const { isMatchType, canvasEditor, isOne } = useSelect(baseType);
 
 const xmlInputRef = ref(null);
@@ -65,8 +65,6 @@ const xmlCode = ref('');
 const getObjectAttr = (e) => {
   const activeObject = canvasEditor.canvas.getActiveObject();
   const center = canvasEditor.canvas.getCenterPoint();
-  console.log(activeObject);
-
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return;
   if (activeObject && isMatchType) {
@@ -102,7 +100,7 @@ const setXmlCode = () => {
   if (baseAttr.type === 'group') {
     xmlCode.value = `<${baseAttr.type} x="${x}" y="${y}" angle="${baseAttr.angle}"></${baseAttr.type}>`;
   }
-  if (baseAttr.type === 'text' || baseAttr.type === 'textbox') {
+  if (baseAttr.type === 'i-text' || baseAttr.type === 'textbox') {
     xmlCode.value = `<Text text="${baseAttr.name.trim().replaceAll('\n', '')}" 
     size="${baseAttr.fontSize}" x="${x}" y="${y}" angle="${baseAttr.angle}"
      w="${baseAttr.width}" h="${baseAttr.height}" />`;
